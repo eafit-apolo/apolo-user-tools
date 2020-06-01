@@ -94,7 +94,7 @@ def printTabulate(df, headers='keys', tablefmt='psql'):
 
 
 def main():
-  parser = argparse.ArgumentParser(prog='squeue-apolo'
+  parser = argparse.ArgumentParser(prog='squeue-apolo',
                                    description='''
                                                A custom utility to get information 
                                                about Apolo's queue state''',
@@ -107,7 +107,7 @@ def main():
 
   df = get_jobs_info() 
   
-  print("Mean wait time all active jobs:")
+  print("Mean wait time of all active jobs:")
   print("%s with +/- %s" % (df['wait_time'].mean(),df['wait_time'].std()))
   print()
 
