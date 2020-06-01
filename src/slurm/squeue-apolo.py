@@ -89,8 +89,10 @@ def get_jobs_waiting_partition(jobs, p=None, reasons=None):
 def printTabulate(df, headers='keys', tablefmt='psql'):
   """Wrapper to print df using tabulate
   """
-  
-  print(tabulate(df), headers=headers, tablefmt=tablefmt)
+  if(isinstance(df, pd.Series)):
+    print(df.to_string())
+    return
+  print(tabulate(df, headers=headers, tablefmt=tablefmt))
 
 
 def main():
