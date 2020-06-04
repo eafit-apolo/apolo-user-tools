@@ -1,0 +1,7 @@
+#################################################### 
+# This file contains user custom aliases for Apolo #
+####################################################
+
+###### Slurm ######
+alias mysqueue='squeue -u $USER'
+alias scores="sinfo --format=%C -h | awk -F/ "'"{print \"CPUs\\nallocated/idle/other/total\\n\" \$1,\$2,\$3,\$4}"'" "
