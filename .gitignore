@@ -1,3 +1,6 @@
+# Binary of the repo
+bin/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +130,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*

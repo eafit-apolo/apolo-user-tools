@@ -19,6 +19,7 @@ def get_wait(x):
   deltatime
      difference time
   """
+  
   return datetime.now() - datetime.fromtimestamp(x)
 
 
@@ -63,7 +64,7 @@ def get_jobs_waiting_partition(jobs, p=None, reasons=None):
     data frame with the information of the jobs
   p: str
     name of the partition. If none is specified, all queues are taking into account
-  raesons: list(str)
+  reasons: list(str)
     names of the reasons that are valid. If none is specified all reasons are valid.
     the name of the reason must match with the ones in slurm. 
     
@@ -78,7 +79,7 @@ def get_jobs_waiting_partition(jobs, p=None, reasons=None):
   if(p is not None):
     selected_jobs = jobs[jobs['partition'] == p]
    
-  # A job that is waiting is a jobs that is not running
+  # A job that is waiting is a job that is not running
   selected_jobs = selected_jobs[~(selected_jobs['job_state'] == 'RUNNING')]
   
   # Selected valid reasons
@@ -116,9 +117,12 @@ def main():
   print("Quartiles:")
   printTabulate(df['wait_time'].quantile([0.25,0.5,0.85]))
   print()
-
+   
+  top_10_wait = df.nlargest(10,'wait_time')[['user_name','wait_time','partition','job_state','state_reason', 'time_limit_str']]
+  top_10_wait.rename({'user_name':"user name",'wait_time': "waiting time",'job_state': "job state",
+                      'state_reason': "state reason", 'time_limit_str': "wall time limit" }, inplace=True)
   print("Top 10 wait time jobs")
-  printTabulate(df.nlargest(10,'wait_time')[['user_name','wait_time','partition','job_state','state_reason', 'time_limit_str']])
+  printTabulate(top_10_wait)
   print()
 
   valid_reasons_to_wait = ['Resources', 'Reservation', 'Priority']
@@ -130,6 +134,20 @@ def main():
   print("Accel-2:  %i" % n_accel_2_waiting_jobs)
   print("Total:    %i" % (n_accel_waiting_jobs + n_accel_2_waiting_jobs))
   print()
+
+  n_bigmem_waiting_jobs = len(get_jobs_waiting_partition(df, 'bigmem', valid_reasons_to_wait))
+  n_longjobs_waiting_jobs =  len(get_jobs_waiting_partition(df, 'longjobs', valid_reasons_to_wait))
+  n_waiting_jobs =  len(get_jobs_waiting_partition(df, reasons=valid_reasons_to_wait))
+  n_other_waiting_jobs = n_waiting_jobs - (n_accel_waiting_jobs + n_accel_2_waiting_jobs +
+                                           n_bigmem_waiting_jobs + n_longjobs_waiting_jobs)
+
+  print("Number of Jobs waiting on other queues")
+  print("Longjobs:         %i" % n_longjobs_waiting_jobs)
+  print("BigMem:           %i" % n_bigmem_waiting_jobs)
+  print("Other (non-GPU):  %i" % n_other_waiting_jobs)
+  print("Total:            %i" % (n_longjobs_waiting_jobs + n_bigmem_waiting_jobs + n_other_waiting_jobs))
+  print()
+
   print("Top 5 users by number of active jobs")
   printTabulate(df.groupby('user_name')['job_id'].agg('count').nlargest(5))
   print()
