@@ -107,7 +107,9 @@ def main():
                                    epilog='''
                                    Only jobs waiting for valid reasons are take into
                                    account to display information. Valid reasons are:
-                                   Resources, Priority and Reservation; not QOS reasons''')
+                                   Resources, Priority and Reservation; not QOS reasons.
+                                   This command is part of apolo-users-tools, feel free to contribute
+                                   https://github.com/eafit-apolo/apolo-user-tools''')
   args = parser.parse_args()
   ## TODO use args to create special behavior
 
