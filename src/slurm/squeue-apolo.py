@@ -74,10 +74,13 @@ def get_jobs_waiting_partition(jobs, p=None, reasons=None):
   Dataframe
      Selected jobs
   """
+
   selected_jobs = pd.DataFrame()
   # Selected by partition
   if(p is not None):
     selected_jobs = jobs[jobs['partition'] == p]
+  else:
+    selected_jobs = jobs
    
   # A job that is waiting is a job that is not running
   selected_jobs = selected_jobs[~(selected_jobs['job_state'] == 'RUNNING')]
@@ -119,17 +122,19 @@ def main():
   print()
    
   top_10_wait = df.nlargest(10,'wait_time')[['user_name','wait_time','partition','job_state','state_reason', 'time_limit_str']]
-  top_10_wait.rename({'user_name':"user name",'wait_time': "waiting time",'job_state': "job state",
-                      'state_reason': "state reason", 'time_limit_str': "wall time limit" }, inplace=True)
+  top_10_wait.rename(columns={'user_name':"user name",'wait_time': "waiting time",'job_state': "job state",
+                              'state_reason': "state reason", 'time_limit_str': "wall time limit"}, inplace=True)
   print("Top 10 wait time jobs")
   printTabulate(top_10_wait)
   print()
-
+   
+ # List of valid reasons to wait
   valid_reasons_to_wait = ['Resources', 'Reservation', 'Priority']
+
   n_accel_waiting_jobs = len(get_jobs_waiting_partition(df, 'accel', valid_reasons_to_wait))
   n_accel_2_waiting_jobs =  len(get_jobs_waiting_partition(df, 'accel-2', valid_reasons_to_wait))
 
-  print("Number of Jobs Waiting for GPU")
+  print("Number of jobs waiting for GPU")
   print("Accel:    %i" % n_accel_waiting_jobs)
   print("Accel-2:  %i" % n_accel_2_waiting_jobs)
   print("Total:    %i" % (n_accel_waiting_jobs + n_accel_2_waiting_jobs))
@@ -141,7 +146,7 @@ def main():
   n_other_waiting_jobs = n_waiting_jobs - (n_accel_waiting_jobs + n_accel_2_waiting_jobs +
                                            n_bigmem_waiting_jobs + n_longjobs_waiting_jobs)
 
-  print("Number of Jobs waiting on other queues")
+  print("Number of jobs waiting on other queues")
   print("Longjobs:         %i" % n_longjobs_waiting_jobs)
   print("BigMem:           %i" % n_bigmem_waiting_jobs)
   print("Other (non-GPU):  %i" % n_other_waiting_jobs)
