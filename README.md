@@ -1,22 +1,39 @@
-# apolo-user-tools
-Tools to help users.
+# Apolo-User-Tools
+This repository contains useful commands, aliases and tools that are available for all users in Apolo. 
 
+Feel free to add new commands, aliases. Check out our [contribution guidelines](CONTRIBUTING.md)
 
-Fields
-### List of available columns in the dataframe
-['account', 'accrue_time', 'admin_comment', 'alloc_node', 'alloc_sid', 'array_job_id', 'array_max_tasks', 
-'array_task_id', 'array_task_str', 'assoc_id', 'batch_features', 'batch_flag', 'batch_host', 'billable_tres',
-'bitflags', 'boards_per_node', 'burst_buffer', 'burst_buffer_state', 'command', 'comment', 'contiguous',
-'core_spec', 'cores_per_socket', 'cpu_freq_gov', 'cpu_freq_max', 'cpu_freq_min', 'cpus_alloc_layout', 
-'cpus_allocated', 'cpus_per_task', 'cpus_per_tres', 'dependency', 'derived_ec', 'eligible_time', 'end_time',
-'exc_nodes', 'exit_code', 'features', 'group_id', 'job_id', 'job_state', 'last_sched_eval', 'licenses',
-'max_cpus', 'max_nodes', 'mem_per_cpu', 'mem_per_node', 'mem_per_tres', 'min_memory_cpu', 'min_memory_node', 
-'name', 'network', 'nice', 'nodes', 'ntasks_per_board', 'ntasks_per_core', 'ntasks_per_core_str', 'ntasks_per_node', 
-'ntasks_per_socket', 'ntasks_per_socket_str', 'num_cpus', 'num_nodes', 'partition', 'pn_min_cpus', 'pn_min_memory',
-'pn_min_tmp_disk', 'power_flags', 'preempt_time', 'priority', 'profile', 'qos', 'reboot', 'req_nodes', 'req_switch',
-'requeue', 'resize_time', 'restart_cnt', 'resv_name', 'run_time', 'run_time_str', 'sched_nodes', 'shared',
-'show_flags', 'sockets_per_board', 'sockets_per_node', 'start_time', 'state_reason', 'std_err', 'std_in',
-'std_out', 'submit_time', 'suspend_time', 'system_comment', 'threads_per_core', 'time_limit', 'time_limit_str',
-'time_min', 'tres_alloc_str', 'tres_bind', 'tres_freq', 'tres_per_job', 'tres_per_node', 'tres_per_socket',
-'tres_per_task', 'tres_req_str', 'user_id', 'wait4switch', 'wckey', 'work_dir', 'wait_time', 'user_name']
+## Repository structure
+The repo contains two main directories: 
+`bash-tools` and `src`
 
+* `bash-tools`:
+contains aliases or functions that are written in *Bash*.
+If you plan to add aliases put it in the file `default-aliases` in the section related with propose of the alias. If more complex commands are needed, include it using another file in the same directory with a clear title.
+
+* `src`:
+contains directories with more complex commands that are written in any language, we specially encourage the use of *Python*. The directories inside `src` are application-specific, e.g: slurm, ansible, file-system, etc.
+   
+   * `application-specific`: these directories contain the different scripts that will become available commands to our users.  These scripts could be in single files or directories. Commands in the same `application-specific` directory share the same environnement and language, libraries or other requisites used by the environment must be specified in a file inside the directory. Each `application-specific` contains a single file that specifies these requisites, feel free to modify in case you need other requisites. 
+
+This is an example of the directory structure: 
+```
+apolo-user-tools/
+├── bash-tools
+│   ├── default-aliases
+│   ├── default-functions
+│   └── learning-users-aliases
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+└── src
+    ├── file-system
+    │   ├── command2.py
+    │   ├── quotas
+    │   │   ├── command1.py
+    │   │   └── vars_file.py
+    │   └── requirements.txt
+    └── slurm
+        ├── requirements.txt
+        └── squeue-apolo.py
+```
