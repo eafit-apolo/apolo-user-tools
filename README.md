@@ -14,7 +14,7 @@ If you plan to add aliases put it in the file `default-aliases` in the section r
 * `src`:
 contains directories with more complex commands that are written in any language, we specially encourage the use of *Python*. The directories inside `src` are application-specific, e.g: slurm, ansible, file-system, etc.
    
-   * `application-specific`: these directories contain the different scripts that will become available commands to our users.  These scripts could be in single files or directories. Commands in the same `application-specific` directory share the same environnement and language, libraries or other requisites. Each `application-specific` directory contains a single file that specifies these requisites, feel free to modify.
+   * `application-specific`: these directories contain the different scripts that will become available commands to our users.  These scripts could be in single files or directories. Commands in the same `application-specific` directory share the same environnement and language, libraries or other requisites. Each `application-specific` directory contains a single file that specifies these requisites, feel free to modify it.
 
 This is an example of the directory structure: 
 ```
