@@ -1,7 +1,7 @@
 # How to contribute
 
 #### **Do you intend to add a new command, tool or change an existing one?**
-   * Suggest your change by creating a [pull Request to apolo-users-tools](https://github.com/eafit-apolo/apolo-user-tools/pull/new/master)
+   * Suggest your change by creating a [pull request to apolo-users-tools](https://github.com/eafit-apolo/apolo-user-tools/pull/new/master)
    * Ensure you follow the repository structure and the instructions to submit changes bellow. 
    * One of our team members in Apolo will review your contribution and send you feedback, if everything is in order we will deploy it on the cluster and make it available to all our users.
 
@@ -15,7 +15,7 @@
 
 ## Submitting changes
 
-Please send a [GitHub Pull Request to apolo-users-tools](https://github.com/eafit-apolo/apolo-user-tools/pull/new/master) with a clear list of what you've done (read more about [pull requests](http://help.github.com/pull-requests/)). When you send a pull request it is important to follow the directory structure of this repository and include all the elements needed for your contribution. For more information please check [README](README.md). Please follow our coding conventions (below) and make sure all of your commits are atomic (one feature per commit).
+Please send a [Github pull request to apolo-users-tools](https://github.com/eafit-apolo/apolo-user-tools/pull/new/master) with a clear list of what you've done (read more about [pull requests](http://help.github.com/pull-requests/)). When you send a pull request it is important to follow the directory structure of this repository and include all the elements needed for your contribution. For more information please check [README](README.md). Please follow our coding conventions (below) and make sure all of your commits are atomic (one feature per commit).
 
 Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
 
@@ -42,7 +42,9 @@ Always write a clear log message for your commits. One-line messages are fine fo
         https://github.com/eafit-apolo/apolo-user-tools
         ```
 
-      * In all cases, please follow the directory structure of this repository and include the elements of your specific contribution.  
+      * In all cases, please follow the directory structure of this repository and include the elements of your specific contribution.
+
+      * Scripts should not include the *shebang* symbol (`#!`) at the begging of the file. This will interfere with the deployment process. 
 
 Thanks for reading this, we appreciate any improvement you made to this repository.
 

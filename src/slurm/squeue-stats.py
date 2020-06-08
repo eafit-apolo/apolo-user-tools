@@ -1,10 +1,20 @@
-import pyslurm
-import pandas as pd
-from tabulate import tabulate
+#================================================
+#Author:       Juan D. Arcila-Moreno
+#Copyright:    2020, apolo-user-tools
+#Version:      0.1.0
+#Maintainer:   Apolo Scientific Computing Center
+#Email:        apolo@eafit.edu.co
+#Status:       production
+#================================================
 
 from datetime import datetime
 import argparse
 import pwd
+
+# Modules needed to run the script.
+import pyslurm
+import pandas as pd
+from tabulate import tabulate
 
 def get_wait(x):
   """Get time difference between timestamp and now
@@ -100,7 +110,7 @@ def printTabulate(df, headers='keys', tablefmt='psql'):
 
 
 def main():
-  parser = argparse.ArgumentParser(prog='squeue-apolo',
+  parser = argparse.ArgumentParser(prog='squeue-stats',
                                    description='''
                                                A custom utility to get information 
                                                about Apolo's queue state''',
@@ -130,7 +140,7 @@ def main():
   printTabulate(top_10_wait)
   print()
    
- # List of valid reasons to wait
+  # List of valid reasons to wait
   valid_reasons_to_wait = ['Resources', 'Reservation', 'Priority']
 
   n_accel_waiting_jobs = len(get_jobs_waiting_partition(df, 'accel', valid_reasons_to_wait))

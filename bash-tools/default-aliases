@@ -3,5 +3,5 @@
 ####################################################
 
 ###### Slurm ######
-alias mysqueue='squeue -u $USER'
-alias scores="sinfo --format=%C -h | awk -F/ "'"{print \"CPUs\\nallocated/idle/other/total\\n\" \$1,\$2,\$3,\$4}"'" "
+alias smyqueue='squeue -u $USER'
+alias sncores="sinfo --format=%C -h | awk -F/ "'"{print \"CORES\\nallocated/idle/other/total\\n\" \$1,\$2,\$3,\$4}"'" "

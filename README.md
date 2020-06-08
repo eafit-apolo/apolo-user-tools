@@ -9,12 +9,12 @@ The repo contains two main directories:
 
 * `bash-tools`:
 contains aliases or functions that are written in *Bash*.
-If you plan to add aliases put it in the file `default-aliases` in the section related with propose of the alias. If more complex commands are needed, include it using another file in the same directory with a clear title.
+If you plan to add aliases put it in the file `default-aliases` in the section related with purpose of the alias. If more complex commands are needed, include it using another file in the same directory with a clear title.
 
 * `src`:
 contains directories with more complex commands that are written in any language, we specially encourage the use of *Python*. The directories inside `src` are application-specific, e.g: slurm, ansible, file-system, etc.
    
-   * `application-specific`: these directories contain the different scripts that will become available commands to our users.  These scripts could be in single files or directories. Commands in the same `application-specific` directory share the same environnement and language, libraries or other requisites used by the environment must be specified in a file inside the directory. Each `application-specific` contains a single file that specifies these requisites, feel free to modify in case you need other requisites. 
+   * `application-specific`: these directories contain the different scripts that will become available commands to our users.  These scripts could be in single files or directories. Commands in the same `application-specific` directory share the same environnement and language, libraries or other requisites. Each `application-specific` directory contains a single file that specifies these requisites, feel free to modify.
 
 This is an example of the directory structure: 
 ```
@@ -35,5 +35,5 @@ apolo-user-tools/
     │   └── requirements.txt
     └── slurm
         ├── requirements.txt
-        └── squeue-apolo.py
+        └── squeue-stats.py
 ```
