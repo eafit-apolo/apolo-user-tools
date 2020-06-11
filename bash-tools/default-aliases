@@ -1,0 +1,7 @@
+#################################################### 
+# This file contains user custom aliases for Apolo #
+####################################################
+
+###### Slurm ######
+alias smyqueue='squeue -u $USER'
+alias sncores="sinfo --format=%C -h | awk -F/ "'"{print \"CORES\\nallocated/idle/other/total\\n\" \$1,\$2,\$3,\$4}"'" "
