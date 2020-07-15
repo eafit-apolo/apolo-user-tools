@@ -4,4 +4,17 @@
 
 ###### Slurm ######
 alias smyqueue='squeue -u $USER'
+
 alias sncores="sinfo --format=%C -h | awk -F/ "'"{print \"CORES\\nallocated/idle/other/total\\n\" \$1,\$2,\$3,\$4}"'" "
+
+function sqos-usage(){
+  local group=$(id -gn)
+  local qos=$(sacctmgr -n show assoc user=$USER format=qos%50 | uniq | awk '{print $1}')
+  local qos_usageraw=$(scontrol show assoc_mgr qos=$qos  | grep UsageRaw= | awk -F = '{print $2/3600}')
+  local qos_total=$(sacctmgr -n show qos where name=$qos format=GrpTRESMins | awk -F = '{print $2/60}')
+  local left_time=$( echo $qos_total - $qos_usageraw | bc -l)
+  echo "$group has used $qos_usageraw core-hours of $qos_total available. There are $left_time left"
+}
+
+###### System ######
+alias du-home=' du -sh $HOME'
